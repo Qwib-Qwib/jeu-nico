@@ -47,40 +47,80 @@ function toggleConfirmationButton() {
 }
 
 function displayPlayer2Form(e) {
+  resetFormFields();
+  printP2Instructions();
+  modifyConfirmationButton(e);
+}
+
+function resetFormFields() {
   lastNameFormField.value = "";
   firstNameFormField.value = "";
+}
+
+function printP2Instructions() {
   instructions.textContent = "Joueur 2, quel est votre nom ?";
-  instructions.classList.replace('P1', 'P2')
+  instructions.classList.replace('P1', 'P2');
+}
+
+function modifyConfirmationButton(e) {
   e.target.value = "Commencer la partie";
   e.target.removeEventListener("click", displayPlayer2Form);
   e.target.addEventListener("click", beginGame);
 }
 
 function beginGame(e) {
+  removeNameForm();
+  createGameBoard();
+}
+
+function removeNameForm() {
   while (document.body.firstChild) {
-    document.body.removeChild(document.body.firstChild)
+    document.body.removeChild(document.body.firstChild);
   }
+}
+
+function createGameBoard() {
+  let boardSides = createSideContainers();
+  createSideElements(boardSides);
+  identifySideElements(boardSides);
+}
+
+function createSideContainers() {
   let p1Board = document.createElement('div');
   let p2Board = document.createElement('div');
   document.body.append(p1Board, p2Board);
-  for (const element of [p1Board, p2Board]) {
-    let h1 = document.createElement('h1')
+  return [p1Board, p2Board];
+}
+
+function createSideElements(boardSides) {
+  for (const playerSide of boardSides) {
+    let h1 = document.createElement('h1');
     let p = document.createElement('p');
-    let button1 = document.createElement('input');
-    button1.setAttribute('value', 'Pierre')
-    let button2 = document.createElement('input');
-    button2.setAttribute('value', 'Feuille')
-    let button3 = document.createElement('input');
-    button3.setAttribute('value', 'Ciseau')
-    element.append(h1, p, button1, button2, button3);
+    let buttonArray = createButtons();
+    playerSide.append(h1, p, buttonArray[0], buttonArray[1], buttonArray[2]);
   }
-  for (const element of [button1, button2, button3]) {
-    element.setAttribute('type', 'button')
+}
+
+function createButtons() {
+  let button1 = document.createElement('input');
+  button1.setAttribute('value', 'Pierre');
+  let button2 = document.createElement('input');
+  button2.setAttribute('value', 'Feuille');
+  let button3 = document.createElement('input');
+  button3.setAttribute('value', 'Ciseau');
+  for (const button of [button1, button2, button3]) {
+    button.setAttribute('type', 'button');
   }
-  for (const element of p1Board.children) {
-  element.classList.add("P1");
+  return [button1, button2, button3];
+}
+
+function identifySideElements(boardSides) {
+  boardSides[0].classList.add("P1");
+  for (const element of boardSides[0].children) {
+    element.classList.add("P1");
   }
-  for (const element of p2Board.children) {
+  boardSides[1].classList.add("P2");
+  for (const element of boardSides[1].children) {
     element.classList.add("P2");
-    }
+  }
 }
