@@ -69,8 +69,10 @@ function modifyConfirmationButton(e) {
 }
 
 function beginGame(e) {
+  let p1Score = 0;
+  let p2Score = 0;
   removeNameForm();
-  createGameBoard();
+  createGameBoard(p1Score, p2Score);
 }
 
 function removeNameForm() {
@@ -79,16 +81,17 @@ function removeNameForm() {
   }
 }
 
-function createGameBoard() {
+function createGameBoard(p1Score, p2Score) {
   let boardSides = createSideContainers();
   createSideElements(boardSides);
-  identifySideElements(boardSides);
+  insertText(p1Score, p2Score);
 }
 
 function createSideContainers() {
   let p1Board = document.createElement('div');
   let p2Board = document.createElement('div');
   document.body.append(p1Board, p2Board);
+  identifyContainers(p1Board, p2Board);
   return [p1Board, p2Board];
 }
 
@@ -98,6 +101,7 @@ function createSideElements(boardSides) {
     let p = document.createElement('p');
     let buttonArray = createButtons();
     playerSide.append(h1, p, buttonArray[0], buttonArray[1], buttonArray[2]);
+    identifySideElements(h1, p, buttonArray[0], buttonArray[1], buttonArray[2]);
   }
 }
 
@@ -114,13 +118,34 @@ function createButtons() {
   return [button1, button2, button3];
 }
 
-function identifySideElements(boardSides) {
-  boardSides[0].classList.add("P1");
-  for (const element of boardSides[0].children) {
-    element.classList.add("P1");
-  }
-  boardSides[1].classList.add("P2");
-  for (const element of boardSides[1].children) {
-    element.classList.add("P2");
-  }
+function identifyContainers(p1Board, p2Board) {
+  p1Board.id = "P1";
+  p2Board.id = "P2";
+}
+
+function identifySideElements(h1, p, button1, button2, button3) {
+  h1.id = `${h1.parentElement.id}-name`;
+  p.id = `${p.parentElement.id}-score`;
+  button1.id = `${button1.parentElement.id}-pierre`;
+  button2.id = `${button2.parentElement.id}-feuille`;
+  button3.id = `${button3.parentElement.id}-ciseau`;
+}
+
+function insertText(p1Score, p2Score) {
+  insertNames();
+  insertAndUpdateScores(p1Score, p2Score);
+}
+
+function insertNames() {
+  const nameHeaderP1 = document.getElementById('P1-name');
+  const nameHeaderP2 = document.getElementById('P2-name');
+  nameHeaderP1.innerText = `${p1FirstName + ' ' + p1LastName}`;
+  nameHeaderP2.innerText = `${p2FirstName + ' ' + p2LastName}`;
+}
+
+function insertAndUpdateScores(p1Score, p2Score) {
+  const scoreParaP1 = document.getElementById('P1-score');
+  const scoreParaP2 = document.getElementById('P2-score');
+  scoreParaP1.innerText = `Score : ${p1Score}`;
+  scoreParaP2.innerText = `Score : ${p2Score}`;
 }
