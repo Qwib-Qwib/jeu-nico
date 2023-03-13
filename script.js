@@ -77,6 +77,7 @@ function beginGame(e) {
   let p2Move = '';
   removeNameForm();
   createGameBoard();
+  insertAndUpdateInstructions('none', 'none', 'game start');
 
   function removeNameForm() {
     while (document.body.firstChild) {
@@ -85,6 +86,7 @@ function beginGame(e) {
   }
 
   function createGameBoard() {
+    document.body.id = 'game-page';
     let boardSides = createSideContainers();
     createSideElements(boardSides);
     insertText();
@@ -100,12 +102,16 @@ function beginGame(e) {
 
   function createSideElements(boardSides) {
     for (const playerSide of boardSides) {
+      let textContainer = document.createElement('div');
       let h1 = document.createElement('h1');
       let instructions = document.createElement('p');
       let paraScore = document.createElement('p');
+      let buttonsContainer = document.createElement('div');
       let buttonArray = createButtons();
-      playerSide.append(h1, instructions, paraScore, buttonArray[0], buttonArray[1], buttonArray[2]);
-      identifySideElements(h1, instructions, paraScore, buttonArray[0], buttonArray[1], buttonArray[2]);
+      playerSide.append(textContainer, buttonsContainer);
+      textContainer.append(h1, instructions, paraScore);
+      buttonsContainer.append(buttonArray[0], buttonArray[1], buttonArray[2]);
+      identifySideElements(textContainer, h1, instructions, paraScore, buttonsContainer, buttonArray[0], buttonArray[1], buttonArray[2]);
     }
   }
 
@@ -126,8 +132,8 @@ function beginGame(e) {
   }
 
   function sendMove(e) {
-    chooseMove(e.target.parentElement.id, e.target.value);
-    checkPlayerMoveStatus(e.target.parentElement.id);
+    chooseMove(e.target.parentElement.parentElement.id, e.target.value);
+    checkPlayerMoveStatus(e.target.parentElement.parentElement.id);
   }
 
   function chooseMove(playerID, move) {
@@ -194,15 +200,39 @@ function beginGame(e) {
   function identifyContainers(p1Board, p2Board) {
     p1Board.id = "P1";
     p2Board.id = "P2";
+    p1Board.classList.add('player-container');
+    p2Board.classList.add('player-container');
   }
 
-  function identifySideElements(h1, instructions, paraScore, button1, button2, button3) {
-    h1.id = `${h1.parentElement.id}-name`;
-    instructions.id = `${instructions.parentElement.id}-instructions`;
-    paraScore.id = `${paraScore.parentElement.id}-score`;
-    button1.id = `${button1.parentElement.id}-pierre`;
-    button2.id = `${button2.parentElement.id}-feuille`;
-    button3.id = `${button3.parentElement.id}-ciseau`;
+  function identifySideElements(textContainer, h1, instructions, paraScore, buttonsContainer, button1, button2, button3) {
+    textContainer.id = `${textContainer.parentElement.id}-text-container`;
+    textContainer.classList.add('text-container');
+    h1.id = `${textContainer.parentElement.id}-name`;
+    instructions.id = `${textContainer.parentElement.id}-instructions`;
+    instructions.classList.add('game-instructions');
+    paraScore.id = `${textContainer.parentElement.id}-score`;
+    paraScore.classList.add('score');
+    buttonsContainer.id = `${buttonsContainer.parentElement.id}-buttons-container`;
+    buttonsContainer.classList.add('button-container');
+    identifyGameButtons(buttonsContainer.parentElement.id, button1, button2, button3);
+  }
+
+  function identifyGameButtons(playerContainerID, button1, button2, button3) {
+    giveButtonsIDs(playerContainerID, button1, button2, button3);
+    giveButtonsClasses();
+  }
+
+  function giveButtonsIDs(playerContainerID, button1, button2, button3) {
+    button1.id = `${playerContainerID}-pierre`;
+    button2.id = `${playerContainerID}-feuille`;
+    button3.id = `${playerContainerID}-ciseau`;
+  }
+
+  function giveButtonsClasses() {
+    gameButtons = document.querySelectorAll('input');
+    for (button of gameButtons) {
+      button.classList.add('move-button');
+    }
   }
 
   function insertText() {
