@@ -49,6 +49,7 @@ table {
 
 /* End of reset. */
 html {
+	font-family: sans-serif;
 	height: 100%;
 	box-sizing: border-box;
 }
@@ -174,10 +175,6 @@ label {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
-	}
-
-	.form-row {
-
 	}
 	
 	label {
