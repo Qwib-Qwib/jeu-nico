@@ -117,11 +117,11 @@ function beginGame(e) {
 
   function createButtons() {
     let button1 = document.createElement('input');
-    button1.setAttribute('value', 'Pierre');
+    button1.setAttribute('value', String.fromCodePoint('0x1FAA8'));
     let button2 = document.createElement('input');
-    button2.setAttribute('value', 'Feuille');
+    button2.setAttribute('value', String.fromCodePoint('0x1F4C3'));
     let button3 = document.createElement('input');
-    button3.setAttribute('value', 'Ciseau');
+    button3.setAttribute('value', String.fromCodePoint('0x2702'));
     for (const button of [button1, button2, button3]) {
       button.setAttribute('type', 'button');
     }
@@ -231,7 +231,7 @@ function beginGame(e) {
   function giveButtonsClasses() {
     gameButtons = document.querySelectorAll('input');
     for (button of gameButtons) {
-      button.classList.add('move-button');
+      button.classList.add('move-button', button.id.split('-')[1]);
     }
   }
 
