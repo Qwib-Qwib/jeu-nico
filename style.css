@@ -117,7 +117,7 @@ label {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 
 .player-container {
@@ -157,7 +157,7 @@ label {
 	margin: 3vw 0 3vw 0;
 }
 
-@media (max-height: 730px) {
+@media (max-height: 740px) {
 	.move-button {
 		height: 10vh;
 		width: 10vh;
@@ -165,6 +165,69 @@ label {
 	}
 }
 
+@media (min-width: 600px) {
+	.move-button {
+		height: 9vh;
+		width: 9vh;
+		font-size: 4vh;
+	}
+}
+
+@media screen and (orientation: landscape) {
+	html {
+		/* Rotate the content container */
+		transform: rotate(-90deg);
+		transform-origin: left top;
+		/* Set content width to viewport height */
+		width: 100vh;
+		/* Set content height to viewport width */
+		height: 100vw;
+		overflow-x: hidden;
+		position: absolute;
+		top: 100%;
+		left: 0;
+	}
+
+	h1 {
+		font-size: 7vh;
+	}
+	
+	#instructions {
+		font-size: 5vh;
+	}
+
+	label {
+		font-size: 4.5vh;
+	}
+
+	.move-button {
+		height: 19vh;
+		width: 19vh;
+		font-size: 10vh;
+	}
+	
+	.feuille {
+		margin: 3vh 0 3vh 0;
+	}
+}
+
+@media (max-width: 740px) and (orientation: landscape) {
+	.move-button {
+		height: 10vw;
+		width: 10vw;
+		font-size: 5vw;
+	}
+}
+
+@media (min-width: 600px) and (orientation: landscape) {
+	.move-button {
+		height: 9vw;
+		width: 9vw;
+		font-size: 4vw;
+	}
+}
+
+/*
 @media (min-width: 568px) {
 
 	body {
@@ -230,3 +293,4 @@ label {
 		margin: 0;
 	}
 }
+*/

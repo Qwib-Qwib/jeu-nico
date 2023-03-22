@@ -169,22 +169,22 @@ function beginGame(e) {
   function compareMoves() {
     if (p1Move == p2Move) {
       insertAndUpdateInstructions('none', 'none', 'tie');
-    } else if (p1Move == 'Pierre' && p2Move == 'Feuille') {
+    } else if (p1Move == '🪨' && p2Move == '📃') {
       insertAndUpdateInstructions('P2', 'P1', 'game in progress');
       p2Score++;
-    } else if (p1Move == 'Pierre' && p2Move == 'Ciseau') {
+    } else if (p1Move == '🪨' && p2Move == '✂') {
       insertAndUpdateInstructions('P1', 'P2', 'game in progress');
       p1Score++;
-    } else if (p1Move == 'Feuille' && p2Move == 'Pierre') {
+    } else if (p1Move == '📃' && p2Move == '🪨') {
       insertAndUpdateInstructions('P1', 'P2', 'game in progress');
       p1Score++;
-    } else if (p1Move == 'Feuille' && p2Move == 'Ciseau') {
+    } else if (p1Move == '📃' && p2Move == '✂') {
       insertAndUpdateInstructions('P2', 'P1', 'game in progress');
       p2Score++;
-    } else if (p1Move == 'Ciseau' && p2Move == 'Feuille') {
+    } else if (p1Move == '✂' && p2Move == '📃') {
       insertAndUpdateInstructions('P1', 'P2', 'game in progress');
       p1Score++;
-    } else if (p1Move == 'Ciseau' && p2Move == 'Pierre') {
+    } else if (p1Move == '✂' && p2Move == '🪨') {
       insertAndUpdateInstructions('P2', 'P1', 'game in progress');
       p2Score++;
     }
