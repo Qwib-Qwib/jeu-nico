@@ -1,4 +1,4 @@
-/* initializeGame() est la fonciton principale dans laquelle se trouve le reste du script. */
+/* initializeGame() est la fonction principale dans laquelle se trouve le reste du script. */
 function initializeGame() {
   let firstNameFormField = document.getElementById("first-name");
   let confirmationButton = document.getElementById("confirmation-button");
