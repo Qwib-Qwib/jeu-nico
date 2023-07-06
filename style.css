@@ -64,8 +64,7 @@ body {
 	display: flex;
 	flex-direction: column;
   justify-content: center;
-	align-content: center;
-  transform: rotate(0.25turn);
+	align-items: center;
 }
 
 h1 {
@@ -75,9 +74,12 @@ h1 {
 	align-self: center;
 }
 
+.game-name {
+  margin-bottom: 2%;
+}
+
 #instructions {
 	font-size: 5vw;
-	align-self: start;
   margin-bottom: 20px;
 }
 
@@ -176,7 +178,7 @@ label {
 }
 
 @media screen and (orientation: landscape) {
-	html {
+	.rotated {
 		/* Rotate the content container */
 		transform: rotate(-90deg);
 		transform-origin: left top;

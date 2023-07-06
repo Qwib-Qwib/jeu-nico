@@ -56,6 +56,7 @@ function initializeGame() {
   }
 
   function beginGame(e) {
+    setPageToRotate();
     let p1Score = 0;
     let p2Score = 0;
     let p1Move = '';
@@ -63,6 +64,12 @@ function initializeGame() {
     removeNameForm();
     createGameBoard();
     insertAndUpdateInstructions('none', 'none', 'game start');
+
+    function setPageToRotate() {
+      let page = document.getElementsByTagName('html');
+      console.log(page);
+      page[0].classList.add('rotated');
+    }
 
     function removeNameForm() {
       while (document.body.firstChild) {
