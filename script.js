@@ -6,6 +6,7 @@ function initializeGame() {
   let p1FirstName;
   let p2FirstName;
   confirmationButton.setAttribute("disabled", "");
+  document.addEventListener("keydown", disableDefaultBehavior);
   confirmationButton.addEventListener("click", displayPlayer2Form);
   resetFormFields();
   firstNameFormField.addEventListener("input", processFirstName);
@@ -30,6 +31,13 @@ function initializeGame() {
       confirmationButton.setAttribute("disabled", "");
     } else {
       confirmationButton.removeAttribute("disabled");
+    }
+  }
+
+  function disableDefaultBehavior(e) {
+    if (e.key == 'Enter') {
+      e.preventDefault();
+      confirmationButton.click();
     }
   }
 
@@ -157,7 +165,8 @@ function initializeGame() {
       }
     }
 
-    /* Voir s'il est possible de créer un objet pour chaque joueur, histoire de simplifier cette fonction en permettant une comparaison simple décorellée de l'id de joueur qui a fait chaque coup. */
+    /* Voir s'il est possible de créer un objet pour chaque joueur, histoire de simplifier cette fonction en permettant
+    une comparaison simple décorellée de l'id de joueur qui a fait chaque coup. */
     function compareMoves() {
       if (p1Move == p2Move) {
         insertAndUpdateInstructions('none', 'none', 'tie');
